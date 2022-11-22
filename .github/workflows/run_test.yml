@@ -19,7 +19,7 @@ jobs:
           echo "result=${{ steps.set_output.result }}"
 
       - name: Upload schema to S3
-        if: steps.set_output.result == "false"
+        if: steps.set_output.result == false
         shell: bash
         run: |
           echo "Hello world!"
