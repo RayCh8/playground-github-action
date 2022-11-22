@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run_my_test:
+    runs-on: "ubuntu-20.04"
+    steps:
+      - name: Docker pull test image
+        id: set_output
+        run: |
+          echo "result=true" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Upload schema to S3
+        if: success() && steps.set_output.result == 'true'
+        shell: bash
+        run: |
+          echo "Hello world!"
