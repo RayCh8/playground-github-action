@@ -10,7 +10,7 @@ jobs:
       - name: Docker pull test image
         id: set_output
         run: |
-          echo "result=false" >> $GITHUB_OUTPUT
+          echo "result=true" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Debug info
@@ -19,7 +19,7 @@ jobs:
           echo "result=${{ steps.set_output.result }}"
 
       - name: Upload schema to S3
-        if: ${{ steps.set_output.result == false && success() }}
+        if: ${{ steps.set_output.result && success() }}
         shell: bash
         run: |
           echo "Hello world!"
