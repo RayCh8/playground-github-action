@@ -16,7 +16,7 @@ jobs:
       - name: check if image name
         shell: bash
         run: |
-          if [[ ${{ steps.test_step.outputs.image_name }} == "rails-test" ]]; then
+          if [[ "${{ steps.test_step.outputs.image_name }}" == "rails-test" ]]; then
             echo "good job!"
           else
             echo "It's bad."
