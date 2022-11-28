@@ -7,19 +7,17 @@ jobs:
   run_my_test:
     runs-on: "ubuntu-20.04"
     steps:
-      - name: Docker pull test image
-        id: set_output
-        run: |
-          echo "result=1" >> $GITHUB_OUTPUT
+      - name: set image name
+        id: test_step
         shell: bash
+        run: |
+          echo "image_name=rails-test" >> $GITHUB_OUTPUT
 
-      - name: Debug info
+      - name: check if image name
         shell: bash
         run: |
-          echo "result=${{ steps.set_output.outputs.result }}"
-
-      - name: Upload schema to S3
-        if: steps.set_output.outputs.result == 1 && success()
-        shell: bash
-        run: |
-          echo "Hello world!"
+          if [[ ${{ steps.test_step.outputs.image_name }} == "rails-test" ]]; then
+            echo "good job!"
+          else
+            echo "It's bad."
+          fi
